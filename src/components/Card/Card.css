@@ -1,0 +1,52 @@
+.card-container {
+  width: 170px;
+  height: 230px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border: 1px solid #747474 ;
+  padding: 1rem;
+}
+
+.card-container img {
+  width: 100px;
+  height: 150px;
+}
+
+.img-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.card-container > p {
+  font-size: 10px;
+  color: #747474;
+}
+
+.card-container span {
+  font-size: 17px;
+  font-weight: bolder;
+}
+.infoBtn{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 0.5rem;
+}
+
+button{
+    border: none;
+    padding: 0.3rem;
+    background-color: #0d141b;
+    color: #fff;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+
+
+.infoBtn p{
+    font-size: 10px;
+}

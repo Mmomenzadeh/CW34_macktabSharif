@@ -1,0 +1,11 @@
+main {
+  margin-top: 1rem;
+  padding: 1.5rem;
+}
+
+.main-header {
+padding: 0px 55px;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
