@@ -15,17 +15,16 @@ const Modal = () => {
 
   const handleCloseModal = () => {
     setShowMadal(false);
-    setisCheckOut(false)
+    setisCheckOut(false);
   };
 
   const handleCheckModal = () => {
     setisCheckOut(true);
-    dispatch(CLREARCART([]))
+    dispatch(CLREARCART([]));
   };
 
   const handleCLEAR = () => {
-    dispatch(CLREARCART([]))
-
+    dispatch(CLREARCART([]));
   };
 
   const handleDelete = (id) => {
@@ -43,66 +42,67 @@ const Modal = () => {
       {showModal ? (
         <li className="modal-li">
           <div className="modal-container">
-            <div className="background"></div>
-            {!isCheckOut ? (
-              <div className="modal">
-                <div className="Cart_Info">
-                  <div className="cart_info_top">
-                    <div className="order_products">
-                      {state.cartItems.map((item) => {
-                        return (
-                          <div className="order_product_item" key={item.id}>
-                            <div className="img">
-                              <img src={item.img} alt={item.name} />
+            <div className="background">
+              {!isCheckOut ? (
+                <div className="modal">
+                  <div className="Cart_Info">
+                    <div className="cart_info_top">
+                      <div className="order_products">
+                        {state.cartItems.map((item) => {
+                          return (
+                            <div className="order_product_item" key={item.id}>
+                              <div className="img">
+                                <img src={item.img} alt={item.name} />
+                              </div>
+                              <div className="product-name-price">
+                                <p>{item.name}</p>
+                                <span>Price : {item.price}</span>
+                              </div>
+                              <div className="quantity">
+                                <p>QTY : {item.quantity} </p>
+                              </div>
+                              <div className="cart_info-btn">
+                                <button onClick={() => handleDelete(item.id)}>
+                                  <BsTrash />
+                                </button>
+                                <button onClick={handleAddQty}>
+                                  <AiOutlinePlusCircle />
+                                </button>
+                              </div>
                             </div>
-                            <div className="product-name-price">
-                              <p>{item.name}</p>
-                              <span>Price : {item.price}</span>
-                            </div>
-                            <div className="quantity">
-                              <p>QTY : {item.quantity} </p>
-                            </div>
-                            <div className="cart_info-btn">
-                              <button onClick={() => handleDelete(item.id)}>
-                                <BsTrash />
-                              </button>
-                              <button onClick={handleAddQty}>
-                                <AiOutlinePlusCircle />
-                              </button>
-                            </div>
-                          </div>
-                        );
-                      })}
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    <div className="cart_info_bottom">
+                      <button onClick={handleCloseModal}>Close</button>
                     </div>
                   </div>
 
-                  <div className="cart_info_bottom">
-                    <button onClick={handleCloseModal}>Close</button>
+                  <div className="TotalPayment">
+                    <p>Total Item</p>
+                    <span className="qty-payment">{state.total}</span>
+
+                    <p>Total Payment </p>
+                    <span className="price-payment">{state.totalPrice}</span>
+                    <div className="payment-btn">
+                      <button onClick={handleCheckModal}>CHECKOUT</button>
+                      <button onClick={handleCLEAR}>CLEAR</button>
+                    </div>
                   </div>
+
+                  {/* Modal DIV */}
                 </div>
+              ) : (
+                <div className="checkout-ui">
+                  <p>Checkout successfull </p>
 
-                <div className="TotalPayment">
-                  <p>Total Item</p>
-                  <span className="qty-payment">{state.total}</span>
-
-                  <p>Total Payment </p>
-                  <span className="price-payment">{state.totalPrice}</span>
-                  <div className="payment-btn">
-                    <button onClick={handleCheckModal}>CHECKOUT</button>
-                    <button onClick={handleCLEAR}>CLEAR</button>
-                  </div>
+                  <button onClick={handleCloseModal}>Close</button>
                 </div>
-
-                {/* Modal DIV */}
-              </div>
-            ) : (
-              <div className="checkout-ui">
-                <p>Checkout successfull </p>
-
-                <button onClick={handleCloseModal}>Close</button>
-              </div>
-            )}
-            {/* Modal_container Div */}
+              )}
+              {/* Modal_container Div */}
+            </div>
           </div>
         </li>
       ) : null}
