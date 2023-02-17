@@ -1,15 +1,15 @@
-import "./CardList.css"
+import "./CardList.css";
 import { Products } from "../../Data";
 import Card from "../Card";
 
 const CardList = () => {
-    return ( 
-        <div className="CardList-container">
-            {
-                Products.map(product =><Card key={product.id} productInfo={product}/>)
-            }
-        </div>
-     );
-}
- 
+  return (
+    <div className="CardList-container">
+      {Products.map((item) => (
+        <Card key={item.id} item={item} />
+      ))}
+    </div>
+  );
+};
+
 export default CardList;

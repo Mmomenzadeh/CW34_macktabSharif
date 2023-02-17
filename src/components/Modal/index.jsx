@@ -1,70 +1,103 @@
 import "./Modal.css";
 import { BsTrash } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { DELETE } from "../../redux/ShoppingSlice";
+import { useState } from "react";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Modal = () => {
+  const [showModal, setShowMadal] = useState(false);
+  const [isCheckOut, setisCheckOut] = useState(false);
+
+  const state = useSelector((state) => state.order);
+  const dispatch = useDispatch();
+
+  const handleCloseModal = () => {
+    setShowMadal(false);
+  };
+
+  const handleCheckModal = ()=>{
+    setisCheckOut(true)
+  }
+
+  const handleCLEAR =()=>{}
+
+  const handleDelete = (id) => {
+    dispatch(DELETE(id));
+  };
+
+  const handleAddQty = () => {};
+
   return (
-    <div className="modal-container">
-      <div className="background"></div>
-      <div className="modal">
-        
-       
-        <div className="Cart_Info">
-          <div className="cart_info_top">
-          <div className="order_products">
-           <div className="order_product_item">
-           <div className="img">
-              <img
-                src="https://react-shooping-cart.netlify.app/img/1.jpg?v=1"
-                alt=""
-              />
+    <>
+      <li onClick={() => setShowMadal(true)}>
+        <FaShoppingCart /> Cart
+      </li>
+
+      {showModal ? (
+       <li className="modal-li">
+         <div className="modal-container">
+          <div className="background"></div>
+          {!isCheckOut ? (
+            <div className="modal">
+              <div className="Cart_Info">
+                <div className="cart_info_top">
+                  <div className="order_products">
+                    {state.cartItems.map((item) => {
+                      return (
+                        <div className="order_product_item" key={item.id}>
+                          <div className="img">
+                            <img src={item.img} alt={item.name} />
+                          </div>
+                          <div className="product-name-price">
+                            <p>{item.name}</p>
+                            <span>Price : {item.price}</span>
+                          </div>
+                          <div className="quantity">
+                            <p>QTY : {item.quantity} </p>
+                          </div>
+                          <div className="cart_info-btn">
+                            <button onClick={() => handleDelete(item.id)}>
+                              <BsTrash />
+                            </button>
+                            <button onClick={handleAddQty}>
+                              <AiOutlinePlusCircle />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                <div className="cart_info_bottom">
+                  <button onClick={handleCloseModal}>Close</button>
+                </div>
+              </div>
+
+              <div className="TotalPayment">
+                <p>Total Item</p>
+                <span className="qty-payment">{state.total}</span>
+
+                <p>Total Payment </p>
+                <span className="price-payment">{state.totalPrice}</span>
+                <div className="payment-btn">
+                  <button onClick={handleCheckModal}>CHECKOUT</button>
+                  <button onClick={handleCLEAR}>CLEAR</button>
+                </div>
+              </div>
+
+              {/* Modal DIV */}
             </div>
-            <div className="product-name-price">
-              <p>shoes</p>
-              <span>Price : 150</span>
-            </div>
-            <div className="quantity">
-              <p>QTY : 5 </p>
-            </div>
-            <div className="cart_info-btn">
-          <button>
-            <BsTrash />
-          </button>
-          <button>
-            <AiOutlinePlusCircle />
-          </button>
+          ) : (
+            <div className="checkout-ui">Checkout successfull </div>
+          )}
+          {/* Modal_container Div */}
         </div>
-           </div>
-          </div>
-       
-          </div>
-         
-          <div className="cart_info_bottom">
-            <button>Close</button>
-          </div>
-        </div>
-  
-     
-        <div className="TotalPayment">
-        
-         <p>Total Item</p>
-         <span className="qty-payment">1</span>
-       
-          <p>Total Payment </p>
-          <span className="price-payment">35000</span>
-          <div className="payment-btn">
-            <button>CHECKOUT</button>
-            <button>CLEAR</button>
-          </div>
-        </div>
-
-
-
-
-        {/* Modal DIV */}
-      </div>
-      {/* Modal_container Div */}
-    </div>
+       </li>
+      ) : null}
+    </>
   );
 };
 

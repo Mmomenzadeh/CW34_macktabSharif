@@ -6,6 +6,7 @@ header {
   margin-top: 1rem;
 }
 ul {
+
   display: flex;
   gap: 1rem;
 }
@@ -21,4 +22,9 @@ ul {
 h1 {
   font-size: 26px;
   font-weight: bold;
+}
+
+ul li:last-child{
+  cursor: pointer;
+
 }
