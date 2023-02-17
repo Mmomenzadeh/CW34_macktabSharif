@@ -32,9 +32,15 @@ const ShoppingSlice = createSlice({
     DELETE: (state, action) => {
       state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
     },
+
+    CLREARCART :(state , action)=>{
+        state.total = 0 ;
+        state.totalPrice = 0 ; 
+        state.cartItems = action.payload
+    }
   },
 });
 
-export const { ADD, DELETE } = ShoppingSlice.actions;
+export const { ADD, DELETE  , CLREARCART} = ShoppingSlice.actions;
 
 export default ShoppingSlice.reducer;
